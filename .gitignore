@@ -1,0 +1,4 @@
+tools/__pycache__/
+assets/raw/
+.DS_Store
+tools/*.png
