@@ -451,7 +451,7 @@ body:not(.is-title) #dialogue { opacity: 1; transform: none; }
 .title-bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/img/rooftop_sunset.webp?v=5') center 42% / cover no-repeat;
+  background: url('../assets/img/rooftop_sunset.webp?v=6') center 42% / cover no-repeat;
   filter: blur(1.6px) saturate(0.92) brightness(0.86);
   transform: scale(1.06);
   animation: drift 26s ease-in-out infinite alternate;
@@ -479,7 +479,8 @@ body:not(.is-title) #dialogue { opacity: 1; transform: none; }
   margin: 0 0 16px;
   font-size: 10px;
   letter-spacing: 0.42em;
-  color: rgba(206, 226, 250, 0.66);
+  color: rgba(214, 232, 252, 0.78);
+  text-shadow: 0 2px 10px rgba(4, 9, 17, 0.9), 0 0 2px rgba(4, 9, 17, 0.7);
 }
 
 .title-inner h1 {
@@ -505,8 +506,9 @@ body:not(.is-title) #dialogue { opacity: 1; transform: none; }
   margin: 16px 0 28px;
   font-size: 12.5px;
   letter-spacing: 0.01em;
-  color: rgba(232, 241, 252, 0.76);
+  color: rgba(240, 247, 255, 0.9);
   word-break: keep-all;
+  text-shadow: 0 2px 12px rgba(4, 9, 17, 0.92), 0 0 3px rgba(4, 9, 17, 0.8);
 }
 
 #title-menu { display: flex; flex-direction: column; gap: 9px; align-items: stretch; }
