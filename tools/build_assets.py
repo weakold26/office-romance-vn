@@ -46,6 +46,18 @@ def alpha_of(path):
     alpha = np.asarray(al).astype(np.float32)
     rgb = np.asarray(im).astype(np.float32)
 
+    # 테두리에 붙어 남은 흰 조각(손가락 사이, 머리카락 옆)을 지운다.
+    # 흰 블라우스·운동화처럼 큰 흰 영역은 건드리지 않는다.
+    near_white = rgb.min(axis=2) > 243
+    edge_zone = ndimage.binary_dilation(alpha < 40, iterations=5)
+    junk = near_white & edge_zone & (alpha > 0)
+    lab, n = ndimage.label(junk)
+    for idx in range(1, n + 1):
+        comp = lab == idx
+        if int(comp.sum()) < 4000:
+            alpha[comp] = 0
+    alpha = ndimage.gaussian_filter(alpha, 0.5)
+
     core = alpha > 235
     filled = rgb.copy()
     have = core.copy()
