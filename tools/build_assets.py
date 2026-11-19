@@ -56,6 +56,43 @@ def alpha_of(path):
         comp = lab == idx
         if int(comp.sum()) < 4000:
             alpha[comp] = 0
+
+    # 실루엣 안쪽에 갇힌 작은 흰 점(머리카락과 목 사이 등)은 주변 색으로 메운다.
+    lab2, _ = ndimage.label(near_white)
+    objs = ndimage.find_objects(lab2)
+    for idx, sl in enumerate(objs, start=1):
+        if sl is None:
+            continue
+        y0, y1 = max(0, sl[0].start - 8), min(rgb.shape[0], sl[0].stop + 8)
+        x0, x1 = max(0, sl[1].start - 8), min(rgb.shape[1], sl[1].stop + 8)
+        comp = (lab2[y0:y1, x0:x1] == idx)
+        area = int(comp.sum())
+        if area == 0 or area > 1500:
+            continue
+        patch = rgb[y0:y1, x0:x1]
+        ring = ndimage.binary_dilation(comp, iterations=6) & ~comp
+        near = ring & (patch.min(axis=2) <= 235)
+        if near.sum() < 40:
+            continue
+        patch[comp] = np.median(patch[near], axis=0)
+
+    # 윤곽선 바로 바깥의 흰 테(원본 배경의 잔여)를 안쪽 색으로 바꾸고 반투명하게 눌러 준다.
+    soft_white = rgb.min(axis=2) > 232
+    trusted = (alpha > 200) & ~soft_white
+    spill = rgb.copy()
+    have = trusted.copy()
+    for _ in range(20):
+        for dy, dx in ((1, 0), (-1, 0), (0, 1), (0, -1)):
+            s_rgb = np.roll(spill, (dy, dx), axis=(0, 1))
+            s_have = np.roll(have, (dy, dx), axis=(0, 1))
+            take = (~have) & s_have
+            spill[take] = s_rgb[take]
+            have = have | take
+    wide = ndimage.binary_dilation(alpha < 20, iterations=9) & (alpha > 0) & soft_white & have
+    rgb[wide] = spill[wide]
+    rim = ndimage.binary_dilation(alpha < 20, iterations=3) & (alpha > 0) & soft_white
+    alpha[rim] *= 0.45
+
     alpha = ndimage.gaussian_filter(alpha, 0.5)
 
     core = alpha > 235
