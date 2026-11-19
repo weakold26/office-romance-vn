@@ -102,6 +102,7 @@ def alpha_of(path):
     alpha[rim] *= 0.45
 
     alpha = ndimage.gaussian_filter(alpha, 0.5)
+    alpha[alpha < 30] = 0  # 흐릿한 잔여 알파가 그림자 필터에 넓게 번지지 않게 한다
 
     core = alpha > 235
     filled = rgb.copy()
@@ -138,6 +139,9 @@ def main():
         for e in exprs:
             rgba = alpha_of(os.path.join(RAW, f"ch_{name}_{e}.png"))
             rgba = rgba.crop(box).resize((tw, TARGET_H), Image.LANCZOS)
+            arr = np.asarray(rgba).copy()
+            arr[:, :, 3] = np.where(arr[:, :, 3] < 30, 0, arr[:, :, 3])
+            rgba = Image.fromarray(arr, "RGBA")
             out = os.path.join(OUT, f"{name}_{e}.webp")
             rgba.save(out, "WEBP", quality=90, method=6)
             print(f"{name}_{e}", rgba.size, os.path.getsize(out))

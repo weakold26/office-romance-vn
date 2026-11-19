@@ -14,23 +14,23 @@
 
   var ASSETS = {
     bg: {
-      office_day: 'assets/img/office_day.webp?v=4',
-      rooftop_sunset: 'assets/img/rooftop_sunset.webp?v=4',
-      office_night: 'assets/img/office_night.webp?v=4',
-      store_night: 'assets/img/store_night.webp?v=4'
+      office_day: 'assets/img/office_day.webp?v=5',
+      rooftop_sunset: 'assets/img/rooftop_sunset.webp?v=5',
+      office_night: 'assets/img/office_night.webp?v=5',
+      store_night: 'assets/img/store_night.webp?v=5'
     },
     char: {
       seoyun: {
-        base: 'assets/img/seoyun_base.webp?v=4',
-        blush: 'assets/img/seoyun_blush.webp?v=4',
-        surprised: 'assets/img/seoyun_surprised.webp?v=4',
-        serious: 'assets/img/seoyun_serious.webp?v=4'
+        base: 'assets/img/seoyun_base.webp?v=5',
+        blush: 'assets/img/seoyun_blush.webp?v=5',
+        surprised: 'assets/img/seoyun_surprised.webp?v=5',
+        serious: 'assets/img/seoyun_serious.webp?v=5'
       },
       haram: {
-        base: 'assets/img/haram_base.webp?v=4',
-        blush: 'assets/img/haram_blush.webp?v=4',
-        surprised: 'assets/img/haram_surprised.webp?v=4',
-        serious: 'assets/img/haram_serious.webp?v=4'
+        base: 'assets/img/haram_base.webp?v=5',
+        blush: 'assets/img/haram_blush.webp?v=5',
+        surprised: 'assets/img/haram_surprised.webp?v=5',
+        serious: 'assets/img/haram_serious.webp?v=5'
       }
     }
   };

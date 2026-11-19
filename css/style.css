@@ -451,7 +451,7 @@ body:not(.is-title) #dialogue { opacity: 1; transform: none; }
 .title-bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/img/rooftop_sunset.webp?v=4') center 42% / cover no-repeat;
+  background: url('../assets/img/rooftop_sunset.webp?v=5') center 42% / cover no-repeat;
   filter: blur(1.6px) saturate(0.92) brightness(0.86);
   transform: scale(1.06);
   animation: drift 26s ease-in-out infinite alternate;
