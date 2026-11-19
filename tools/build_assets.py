@@ -90,6 +90,14 @@ def alpha_of(path):
             have = have | take
     wide = ndimage.binary_dilation(alpha < 20, iterations=9) & (alpha > 0) & soft_white & have
     rgb[wide] = spill[wide]
+
+    # 머리카락 둘레에 남는 밝은 회색 조각은 지운다(얼굴·피부는 채도가 있어 제외된다).
+    top = np.zeros_like(alpha, dtype=bool)
+    top[:int(rgb.shape[0] * 0.165)] = True
+    pale = (rgb.min(axis=2) > 195) & ((rgb.max(axis=2) - rgb.min(axis=2)) < 24)
+    fringe = top & pale & ndimage.binary_dilation(alpha < 20, iterations=12) & (alpha > 0)
+    alpha[fringe] = 0
+
     rim = ndimage.binary_dilation(alpha < 20, iterations=3) & (alpha > 0) & soft_white
     alpha[rim] *= 0.45
 
