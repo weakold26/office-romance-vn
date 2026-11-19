@@ -19,7 +19,7 @@ CHARS = {
 }
 BGS = ["bg_office_day", "bg_rooftop_sunset", "bg_office_night", "bg_store_night"]
 
-ERODE, BLUR = 5, 0.6
+ERODE, BLUR = 9, 0.6
 
 
 def alpha_of(path):

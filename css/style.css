@@ -451,7 +451,7 @@ body:not(.is-title) #dialogue { opacity: 1; transform: none; }
 .title-bg {
   position: absolute;
   inset: 0;
-  background: url('../assets/img/rooftop_sunset.webp?v=2') center 42% / cover no-repeat;
+  background: url('../assets/img/rooftop_sunset.webp?v=3') center 42% / cover no-repeat;
   filter: blur(1.6px) saturate(0.92) brightness(0.86);
   transform: scale(1.06);
   animation: drift 26s ease-in-out infinite alternate;
@@ -585,7 +585,9 @@ body:not(.loading) .loader { opacity: 0; transition: opacity 0.6s; }
   visibility: hidden;
   transition: opacity 1s ease, visibility 1s;
   background:
-    radial-gradient(80% 70% at 50% 42%, rgba(20, 32, 48, 0.95), rgba(8, 12, 20, 0.99) 76%);
+    radial-gradient(85% 75% at 50% 42%, rgba(15, 26, 41, 0.985), rgba(6, 10, 17, 0.997) 74%);
+  backdrop-filter: blur(7px) saturate(0.9);
+  -webkit-backdrop-filter: blur(7px) saturate(0.9);
 }
 #ending-screen.on { opacity: 1; visibility: visible; }
 body.is-ending #dialogue,
